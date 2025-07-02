@@ -1,0 +1,196 @@
+/* === Grille des produits === */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px 24px;
+    padding: 0;
+    margin: 0 auto 50px auto;
+    max-width: 1200px;
+}
+
+/* Carte produit */
+.product-card {
+    background-color: #fff;
+    border-radius: 14px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    overflow: hidden;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    opacity: 0; /* pour animation */
+    transform: translateY(20px);
+}
+
+.product-card.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Hover effet */
+.product-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.18);
+}
+
+/* Image produit */
+.product-card img {
+    width: 100%;
+    height: 350px;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+    border-bottom: 1px solid #eee;
+    border-radius: 14px 14px 0 0;
+}
+
+.product-card:hover img {
+    transform: scale(1.05);
+}
+
+/* Nom du produit */
+.product-card h3 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 22px;
+    color: #222;
+    margin: 16px 20px 6px 20px;
+    text-transform: capitalize;
+    text-align: left;
+}
+
+/* Prix du produit */
+.product-card p {
+    font-family: 'Cambria', serif;
+    font-weight: bold;
+    font-size: 18px;
+    color: #FC0100;
+    margin: 0 20px 20px 20px;
+    text-align: left;
+}
+
+/* Nombre total produits */
+.NbrProduit-disponible {
+    display: flex;
+    justify-content: center;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    margin-top: 32px;
+    font-size: 18px;
+    color: #444;
+}
+
+.NbrProduit-disponible p b {
+    color: #FC0100;
+}
+
+/* Filtres */
+.filters {
+    display: flex;
+    justify-content: space-between;
+    max-width: 800px;
+    margin: 30px auto 40px;
+    padding: 0 10px;
+}
+
+.filter-group {
+    display: flex;
+    align-items: center;
+    background: #fff;
+    padding: 10px 18px;
+    border-radius: 10px;
+    box-shadow: 2px 2px 12px rgba(0,0,0,0.08);
+    transition: box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+.filter-group:hover {
+    box-shadow: 4px 4px 18px rgba(0,0,0,0.15);
+}
+
+.filter-group select {
+    border: none;
+    background: transparent;
+    font-size: 16px;
+    outline: none;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    color: #282828;
+}
+
+.filter-group i {
+    margin-left: 10px;
+    color: #FC0100;
+}
+
+/* Focus sur select */
+.filter-group select:focus {
+    border-bottom: 2px solid #FC0100;
+}
+
+/* Responsive - Tablette */
+@media (max-width: 992px) {
+    .product-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 32px 20px;
+        max-width: 700px;
+        padding: 0 15px;
+    }
+    .product-card img {
+        height: 280px;
+    }
+}
+
+/* Responsive - Mobile */
+@media (max-width: 600px) {
+    .product-grid {
+        grid-template-columns: 1fr;
+        gap: 24px 0;
+        max-width: 400px;
+        padding: 0 15px;
+    }
+    .product-card img {
+        height: 220px;
+        border-radius: 14px 14px 0 0;
+    }
+    .product-card h3, 
+    .product-card p {
+        margin: 12px 15px;
+    }
+    .filters {
+        flex-direction: column;
+        gap: 15px;
+        max-width: 100%;
+        margin-bottom: 30px;
+    }
+    .filter-group {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+/* Bouton Scroll Top */
+#scrollTopBtn {
+    position: fixed;
+    bottom: 50px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    background-color: #FC0100;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.15);
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    z-index: 10000;
+}
+
+#scrollTopBtn:hover {
+    background-color: #b63737;
+    transform: scale(1.1);
+}

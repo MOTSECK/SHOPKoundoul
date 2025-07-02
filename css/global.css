@@ -1,0 +1,43 @@
+/* Réinitialiser les styles par défaut */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+h1,h2,h3,h4,h5,h6{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+p{font-family: Georgia, 'Times New Roman', Times, serif;}
+/* Body */
+body {
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    background-color: #ecf4f7;
+    color: #161819;
+    width: 100%;
+    animation: fadeIn 1s ease-in;
+}
+@keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+.reveal {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+  
+.reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+  
+  
+  
+  
