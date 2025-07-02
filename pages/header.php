@@ -1,4 +1,4 @@
-    <div class="header_button_link">
+ <div class="header_button_link">
         <div class="logo_name">
             <div><a href="pageAccueil.php"><img src="../photo/icon_koundoul_Shop.ico" alt="Logo de Koundoul Shop" class="logo" ></a></div>
             <h1><a href="pageAccueil.php">KOUNDOUL SHOP</a></h1>
@@ -59,52 +59,6 @@
                         <p>🔥 Trouvez votre style avec Koundoul Shop ! 🔥</p>
                     </div>
                 </div>
-                <script>
-                    // Gestion du tiroir de recherche mobile
-                    function openSearchDrawerMobile() {
-                        document.getElementById("searchDrawerMobile").classList.add("active");
-                        document.getElementById("searchOverlayMobile").classList.add("active");
-                        document.body.classList.add("no-scroll");
-                    }
-                    
-                    function closeSearchDrawerMobile() {
-                        document.getElementById("searchDrawerMobile").classList.remove("active");
-                        document.getElementById("searchOverlayMobile").classList.remove("active");
-                        document.body.classList.remove("no-scroll");
-                    }
-                    
-                    // Recherche dynamique
-                    document.getElementById("searchInputMobile").addEventListener("input", async function () {
-                        const query = this.value.trim();
-                        const searchResults = document.getElementById("searchResultsMobile");
-                        
-                        if (query.length === 0) {
-                            searchResults.innerHTML = "";
-                            return;
-                        }
-                        
-                        try {
-                            const response = await fetch(`http://localhost:5000/search?query=${query}`);
-                            const products = await response.json();
-                            
-                            if (products.length === 0) {
-                                searchResults.innerHTML = "<p style='padding:10px;'>Aucun produit trouvé</p>";
-                                return;
-                            }
-                            
-                            searchResults.innerHTML = products.map(product => `
-                                <div class="result-item" ">
-                                    <a href="product.html?image=${product.image}&nom=${product.nom}&prix=${product.prix}">
-                                        <img src="${product.image}" alt="${product.nom}">
-                                        <span>${product.nom} - ${product.prix} FCFA</span>
-                                    </a>
-                                </div>
-                            `).join("");
-                        } catch (error) {
-                            console.error("Erreur lors de la recherche :", error);
-                        }
-                    });
-                </script>
             </div>
             <!-- Icône du menu mobile (trois barres) -->
             <div class="menu-icon" onclick="openMenu()">
@@ -131,4 +85,3 @@
             </div>
         </div>
     </div>
-   

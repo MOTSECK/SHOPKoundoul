@@ -346,11 +346,11 @@
                         <i class="fas fa-truck"></i>
                     </div>
                     <h3>Livraison partout à DAKAR</h3>
-                    <p>À domicile et en point relais</p>
+                    <p>À domicile ou point relais</p>
                 </div>
             </div>
             
-            <div class="slide reveal">
+            <div class="slide">
                 <div class="div_footer_section_horizontal_client">
                     <div class="div_footer_section_horizontal_client_icon">
                         <i class="fas fa-headset"></i>
@@ -362,13 +362,13 @@
         </div>
         
         <!-- Indicateurs -->
-        <div class="dots reveal">
+        <div class="dots">
             <span class="dot active"></span>
             <span class="dot"></span>
         </div>
         
         
-        <div class="div_footer_section_link reveal">
+        <div class="div_footer_section_link ">
             <div class="div_footer_section_link_aboutUs">
                 <a href="pages/pageAccueil.php" id="aboutUs"><img src="photo/icon_koundoul_Shop.ico" alt="logo"  class="div_footer_section_link_aboutUs_logo"></a>
                 <p>Koundoul Shop est une entreprise <br>baser au Sénegal particulierement à Dakar <br>qui evolue depuis 2020 avec de bonne resultat <br> avec satisfaction du client rapide efficace,<br>  leur boutique preferer c'est ici.</p>
@@ -397,7 +397,34 @@
         </div>
     </footer> 
     <script src="javascript/header.js" defer></script>
-    <script src="javascript/slider.js" defer></script>
+    <script>
+        //  slider dans le footer
+document.addEventListener("DOMContentLoaded", () => {
+    let slides = document.querySelectorAll(".slide");
+    let dots = document.querySelectorAll(".dot");
+    let currentIndex = 0;
+
+    function showSlide(index) {
+        slides.forEach((slide, i) => {
+            slide.classList.remove("active");
+            dots[i].classList.remove("active");
+        });
+
+        slides[index].classList.add("active");
+        dots[index].classList.add("active");
+    }
+
+    function nextSlide() {
+        currentIndex = (currentIndex + 1) % slides.length;
+        showSlide(currentIndex);
+    }
+
+    setInterval(nextSlide, 2000); // Change toutes les 2 secondes
+});
+
+
+
+    </script>
     <script>
         document.addEventListener("DOMContentLoaded", () => {
         const reveals = document.querySelectorAll('.reveal');

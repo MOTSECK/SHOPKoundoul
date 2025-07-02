@@ -1,4 +1,3 @@
-
 //  slider dans le footer
 document.addEventListener("DOMContentLoaded", () => {
     let slides = document.querySelectorAll(".slide");
@@ -20,7 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
         showSlide(currentIndex);
     }
 
-    setInterval(nextSlide, 3500); // Change toutes les 2 secondes
+    setInterval(nextSlide, 2000); // Change toutes les 2 secondes
 });
 
 

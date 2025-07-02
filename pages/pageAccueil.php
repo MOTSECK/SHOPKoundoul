@@ -26,7 +26,7 @@
         .then(html => {
           document.getElementById("header-container").innerHTML = html;
     
-          // Charger le fichier header.js
+          //Charger le fichier header.js
           const scriptHeader = document.createElement("script");
           scriptHeader.src = "../javascript/header.js";
           scriptHeader.defer = true;
@@ -216,25 +216,40 @@
                 setInterval(changeSlide, 3500);
             });
     </script>
-
+    <!-- footer -->
     <footer id="footer-container"></footer>
 
-    <!-- Script pour insérer le footer -->
     <script>
-        fetch("footer.php")
-          .then(response => response.text())
-          .then(html => {
-            document.getElementById("footer-container").innerHTML = html;
-            // Charger le fichier slider.js
-            const scriptSlider = document.createElement("script");
-            scriptSlider.src = "../javascript/slider.js";
-            scriptSlider.defer = true;
-            document.body.appendChild(scriptSlider);
-          })
-          .catch(err => console.error("Erreur chargement header :", err));
-      </script>
-    <script src="../javascript/header.js" defer></script>
-    <script src="../javascript/slider.js" defer></script>
+      fetch("footer.php")
+        .then(response => response.text())
+        .then(html => {
+          document.getElementById("footer-container").innerHTML = html;
+    
+        //  slider dans le footer
+            let slides = document.querySelectorAll(".slide");
+            let dots = document.querySelectorAll(".dot");
+            let currentIndex = 0;
+
+            function showSlide(index) {
+                slides.forEach((slide, i) => {
+                    slide.classList.remove("active");
+                    dots[i].classList.remove("active");
+                });
+
+                slides[index].classList.add("active");
+                dots[index].classList.add("active");
+            }
+
+            function nextSlide() {
+                currentIndex = (currentIndex + 1) % slides.length;
+                showSlide(currentIndex);
+            }
+
+            setInterval(nextSlide, 2000); // Change toutes les 2 secondes
+
+        })
+        .catch(err => console.error("Erreur chargement footer :", err));
+    </script>
     <script>
             document.addEventListener("DOMContentLoaded", () => {
             const reveals = document.querySelectorAll('.reveal');

@@ -1,5 +1,4 @@
-
-  // Sélection des éléments
+// Sélection des éléments
 const menuIcon = document.querySelector(".menu-icon");
 const mobileMenu = document.getElementById("mobile-menu");
 const closeBtn = document.querySelector(".close-btn");
@@ -72,13 +71,9 @@ document.addEventListener("DOMContentLoaded", () => {
             console.error("Erreur lors de la recherche :", error);
         }
     });
-
-
-
-
 });
 
-
+// ouvrir le tiroir de recherche pour desktop
     document.getElementById("search-toggle").addEventListener("click", openSearchDrawer);
 
     function openSearchDrawer() {
@@ -94,7 +89,7 @@ document.addEventListener("DOMContentLoaded", () => {
         document.body.classList.remove("no-scroll");
         
     }
-    // ouvrir le tiroir pour mobile 
+ // ouvrir le tiroir de recherche pour mobile 
     document.getElementById("search-toggle-mobile").addEventListener("click", openSearchDrawerMobile);
 
     function openSearchDrawerMobile() {

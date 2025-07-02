@@ -238,12 +238,21 @@ while ($row = $result->fetch_assoc()) {
 </style>
     <!-- Header -->
     <header id="header-container"></header>
+
     <script>
-    fetch("header.php")
+      fetch("header.php")
         .then(response => response.text())
-        .then(data => {
-            document.getElementById("header-container").innerHTML = data;
-        });
+        .then(html => {
+          document.getElementById("header-container").innerHTML = html;
+    
+          //Charger le fichier header.js
+          const scriptHeader = document.createElement("script");
+          scriptHeader.src = "../javascript/header.js";
+          scriptHeader.defer = true;
+          document.body.appendChild(scriptHeader);
+
+        })
+        .catch(err => console.error("Erreur chargement header :", err));
     </script>
 
     <!-- Section Produits Accessoires -->
@@ -300,20 +309,43 @@ while ($row = $result->fetch_assoc()) {
     <!-- Scroll Top Button -->
     <button id="scrollTopBtn"><i class="fas fa-chevron-up"></i></button>
 
-    <!-- Footer -->
+    <!-- footer -->
     <footer id="footer-container"></footer>
+
     <script>
-    fetch("footer.php")
+      fetch("footer.php")
         .then(response => response.text())
-        .then(data => {
-            document.getElementById("footer-container").innerHTML = data;
-        });
+        .then(html => {
+          document.getElementById("footer-container").innerHTML = html;
+    
+        //  slider dans le footer
+            let slides = document.querySelectorAll(".slide");
+            let dots = document.querySelectorAll(".dot");
+            let currentIndex = 0;
+
+            function showSlide(index) {
+                slides.forEach((slide, i) => {
+                    slide.classList.remove("active");
+                    dots[i].classList.remove("active");
+                });
+
+                slides[index].classList.add("active");
+                dots[index].classList.add("active");
+            }
+
+            function nextSlide() {
+                currentIndex = (currentIndex + 1) % slides.length;
+                showSlide(currentIndex);
+            }
+
+            setInterval(nextSlide, 2000); // Change toutes les 2 secondes
+
+        })
+        .catch(err => console.error("Erreur chargement footer :", err));
     </script>
 
     <!-- Scripts -->
-    <script src="../javascript/header.js" defer></script>
     <script src="../javascript/productsAccessoires.js" defer></script>
     <script src="../javascript/main.js" defer></script>
-    <script src="../javascript/slider.js" defer></script>
 </body>
 </html>
