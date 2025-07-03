@@ -1,69 +1,41 @@
-<?php
-session_start();
-if (!isset($_SESSION['admin_id'])) {
-    header("Location: admin_login.php");
-    exit();
-}
-?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Tableau de bord Admin - Koundoul Shop</title>
-    
-    <!-- Les mêmes CSS que ta page d’accueil -->
-    <link rel="icon" href="/photo/icon_koundoul_Shop.ico" type="image/x-icon">
-    <link rel="stylesheet" href="../css/global.css">
-    <link rel="stylesheet" href="../css/header.css">
-    <link rel="stylesheet" href="../css/footer.css">
-    <link rel="stylesheet" href="../css/products.css">
+    <title>Admin Vêtements</title>
+    <link rel="icon" href="../../photo/icon_koundoul_Shop.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../../css/global.css">
+    <link rel="stylesheet" href="../../css/header.css">
+    <link rel="stylesheet" href="../../css/footer.css">
+    <link rel="stylesheet" href="../../css/products.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap" rel="stylesheet">
-    
     <style>
-        /* Style spécifique au dashboard admin */
-        .admin-content {
-            max-width: 900px;
-            margin: 40px auto;
-            padding: 20px;
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 0 15px rgba(0,0,0,0.1);
-            font-family: 'Poppins', sans-serif;
-        }
-        .admin-content h1 {
-            margin-bottom: 30px;
-            text-align: center;
-            color: #007BFF;
-        }
-        .admin-links a {
-            display: inline-block;
-            margin: 10px 20px;
-            padding: 15px 30px;
-            background-color: #007BFF;
-            color: white;
-            text-decoration: none;
-            border-radius: 6px;
-            font-weight: 600;
-            transition: background-color 0.3s ease;
-        }
-        .admin-links a:hover {
-            background-color: #0056b3;
-        }
+        body { font-family: Arial, sans-serif; background: #f4f4f4; margin: 0; padding: 0; }
+        h1, h2 { text-align: center; color: #282828; }
+        form, .message { max-width: 500px; margin: auto; padding: 20px; background: #fff; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        input, select, button, textarea { width: 100%; margin: 8px 0; padding: 12px; border: 1px solid #ccc; border-radius: 4px; font-size: 16px; }
+        button { background: #FC0100; color: white; font-weight: bold; cursor: pointer; border: none; }
+        button:hover { background: #d00000; }
+        #admin-product-list { display: flex; flex-wrap: wrap; justify-content: center; padding: 20px; }
+        .product-item { background: #fff; border-radius: 8px; width: 200px; margin: 10px; padding: 15px; text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .product-item img { width: 100%; height: 150px; object-fit: cover; border-radius: 8px; }
+        .product-item p { margin: 10px 0; font-weight: bold; }
+        .product-item button { background: #FC0100; color: #fff; padding: 8px; border: none; border-radius: 4px; width: 100%; }
+        .product-item button:hover { background: #d00000; }
+        #search-bar { display: block; margin: 20px auto; padding: 10px; width: 60%; max-width: 400px; border-radius: 4px; border: 1px solid #ccc; }
     </style>
 </head>
 <body>
-    <!-- Header -->
     <header>
-        <div class="header_button_link">
-            <div class="logo_name">
-                <div><a href="admin.php"><img src="../photo/icon_koundoul_Shop.ico" alt="Logo de Koundoul Shop" class="logo" ></a></div>
-                <h1><a href="admin.php">KOUNDOUL SHOP</a></h1>
-            </div>
+            <div class="header_button_link">
+        <div class="logo_name">
+            <div><a href="admin.php"><img src="../../photo/icon_koundoul_Shop.ico" alt="Logo de Koundoul Shop" class="logo" ></a></div>
+            <h1><a href="admin.php">KOUNDOUL SHOP</a></h1>
+        </div>
         <div>
             <nav>
                 <ul class="link_button_position">
@@ -179,8 +151,8 @@ if (!isset($_SESSION['admin_id'])) {
                 <ul class="mobile-menu_link">
                     <li><a href="admin.php"><i class="fas fa-home"></i> Accueil</a></li>
                     <li><a href="adminVetement.php"><i class="fas fa-tshirt"></i> Vêtements</a></li>
-                    <li><a href="adminAccessoire.php"><i class="fas fa-cogs"></i> Accessoires</a></li>
-                    <li><a href="adminChaussure.php"><i class="fas fa-shoe-prints"></i> Chaussures</a></li>
+                    <li><a href="adminAccessoires.php"><i class="fas fa-cogs"></i> Accessoires</a></li>
+                    <li><a href="adminChaussures.php"><i class="fas fa-shoe-prints"></i> Chaussures</a></li>
                     <li><a href="adminPanier.php"><i class="fas fa-shopping-cart"></i> Panier</a></li>
                 </ul>
             </div>
@@ -195,39 +167,97 @@ if (!isset($_SESSION['admin_id'])) {
    
     </header>
 
+    <h1>Gestion des Vêtements</h1>
+    <h2>Ajouter un Vêtement</h2>
+    <form id="product-form" enctype="multipart/form-data" method="post" action="ajouter_vetement.php">
+        <input type="file" name="image" accept="image/*" required>
+        <input type="text" name="nom" placeholder="Nom du produit" required>
+        <input type="number" step="0.01" name="prix" placeholder="Prix (en FCFA)" required min="0">
+        <input type="hidden" name="categorie" value="vetement">
+        <select name="type" required>
+            <option value="" disabled selected>-- Sélectionner un type --</option>
+            <option value="T-shirt">T-shirt</option>
+            <option value="Pantalon">Pantalon</option>
+            <option value="Autres">Autres</option>
+        </select>
+        <button type="submit">Ajouter</button>
+    </form>
 
+    <input type="text" id="search-bar" placeholder="Rechercher un produit...">
 
+    <h2>Produits</h2>
+    <div id="admin-product-list"></div>
+    <p class="message" id="no-products-message" style="display:none;">Aucun produit trouvé.</p>
 
-    <!-- CONTENU ADMIN -->
-    <main class="admin-content">
-        <h1>Tableau de bord Admin</h1>
-        <div class="admin-links">
-            <a href="adminVetement.php">Gérer les Vêtements</a>
-            <a href="adminChaussure.php">Gérer les Chaussures</a>
-            <a href="adminAccessoire.php">Gérer les Accessoires</a>
-        </div>
-    </main>
-
-    <!-- Footer -->
-    <footer id="footer-container"></footer>
-
-    <!-- Script pour insérer le footer -->
     <script>
-        fetch("footer.php")
-          .then(response => response.text())
-          .then(html => {
-            document.getElementById("footer-container").innerHTML = html;
-            // Charger le fichier slider.js
-            const scriptSlider = document.createElement("script");
-            scriptSlider.src = "../javascript/slider.js";
-            scriptSlider.defer = true;
-            document.body.appendChild(scriptSlider);
-          })
-          .catch(err => console.error("Erreur chargement header :", err));
-      </script>
-    <!-- Scripts -->
+        const form = document.getElementById("product-form");
+        const productList = document.getElementById("admin-product-list");
+        const noProductsMessage = document.getElementById("no-products-message");
+        const searchBar = document.getElementById("search-bar");
 
-    <script src="../javascript/header.js" defer></script>
-    <script src="../javascript/slider.js" defer></script>
+        form.addEventListener("submit", function(e) {
+            e.preventDefault();
+            const formData = new FormData(form);
+
+            fetch("ajouter_vetement.php", {
+                method: "POST",
+                body: formData
+            }).then(res => res.text())
+              .then(msg => {
+                  alert(msg);
+                  form.reset();
+                  fetchProducts();
+              }).catch(() => alert("Erreur lors de l'ajout du produit."));
+        });
+
+        function fetchProducts() {
+            fetch("recuperer_vetement.php")
+                .then(res => res.json())
+                .then(data => {
+                    productList.innerHTML = "";
+                    if (!data || data.length === 0) {
+                        noProductsMessage.style.display = "block";
+                        return;
+                    }
+                    noProductsMessage.style.display = "none";
+                    data.forEach(product => {
+                        const div = document.createElement("div");
+                        div.className = "product-item";
+                        div.innerHTML = `
+                            <img src="../../${product.image}" alt="Produit ${product.nom}-CHEZ KOUNDOULSHOP">
+                            <p>${product.nom} - ${product.prix} FCFA</p>
+                            <button onclick="deleteProduct(${product.id})">Supprimer</button>
+                        `;
+                        productList.appendChild(div);
+                    });
+                })
+                .catch(() => {
+                    noProductsMessage.style.display = "block";
+                    productList.innerHTML = "";
+                });
+        }
+
+        function deleteProduct(id) {
+            if (confirm("Supprimer ce produit ?")) {
+                fetch("supprimer_produits.php?id=" + id)
+                    .then(res => res.text())
+                    .then(msg => {
+                        alert(msg);
+                        fetchProducts();
+                    }).catch(() => alert("Erreur lors de la suppression."));
+            }
+        }
+
+        searchBar.addEventListener("input", () => {
+            const term = searchBar.value.toLowerCase();
+            document.querySelectorAll(".product-item").forEach(item => {
+                const name = item.querySelector("p").textContent.toLowerCase();
+                item.style.display = name.includes(term) ? "block" : "none";
+            });
+        });
+
+        fetchProducts();
+    </script>
+    <script src="../../javascript/header.js" defer></script>
 </body>
 </html>

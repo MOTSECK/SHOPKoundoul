@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8" />
     <title>Admin Vêtements</title>
-    <link rel="icon" href="/photo/icon_koundoul_Shop.ico" type="image/x-icon">
-    <link rel="stylesheet" href="../css/global.css">
-    <link rel="stylesheet" href="../css/header.css">
-    <link rel="stylesheet" href="../css/footer.css">
-    <link rel="stylesheet" href="../css/products.css">
+    <link rel="icon" href="../../photo/icon_koundoul_Shop.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../../css/global.css">
+    <link rel="stylesheet" href="../../css/header.css">
+    <link rel="stylesheet" href="../../css/footer.css">
+    <link rel="stylesheet" href="../../css/products.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -33,7 +33,7 @@
     <header>
             <div class="header_button_link">
         <div class="logo_name">
-            <div><a href="admin.php"><img src="../photo/icon_koundoul_Shop.ico" alt="Logo de Koundoul Shop" class="logo" ></a></div>
+            <div><a href="admin.php"><img src="../../photo/icon_koundoul_Shop.ico" alt="Logo de Koundoul Shop" class="logo" ></a></div>
             <h1><a href="admin.php">KOUNDOUL SHOP</a></h1>
         </div>
         <div>
@@ -224,7 +224,7 @@
                         const div = document.createElement("div");
                         div.className = "product-item";
                         div.innerHTML = `
-                            <img src="../${product.image}" alt="Produit ${product.nom}">
+                            <img src="../../${product.image}" alt="Produit ${product.nom}-CHEZ KOUNDOULSHOP../">
                             <p>${product.nom} - ${product.prix} FCFA</p>
                             <button onclick="deleteProduct(${product.id})">Supprimer</button>
                         `;
@@ -258,7 +258,6 @@
 
         fetchProducts();
     </script>
-    <script src="../javascript/header.js" defer></script>
-    <script src="../javascript/slider.js" defer></script>
+    <script src="../../javascript/header.js" defer></script>
 </body>
 </html>

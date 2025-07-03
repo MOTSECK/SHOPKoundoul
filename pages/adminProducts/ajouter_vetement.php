@@ -7,14 +7,14 @@ if ($conn->connect_error) {
 // Récupération des champs du formulaire
 $nom = $_POST['nom'] ?? '';
 $prix = $_POST['prix'] ?? 0;
-$categorie = 'chaussure'; // Forcé pour les vêtements
+$categorie = 'vetement'; // Forcé pour les vêtements
 $type = $_POST['type'] ?? 'Autres';
 
 // Vérification de l'image
 if (isset($_FILES['image']) && $_FILES['image']['error'] === 0) {
     $imageTmp = $_FILES['image']['tmp_name'];
     $imageName = uniqid('', true) . '_' . basename($_FILES['image']['name']);
-    $uploadDir = '../uploads/';
+    $uploadDir = '../../uploads/';
     $uploadPath = $uploadDir . $imageName;
 
     if (!is_dir($uploadDir)) {
@@ -28,7 +28,7 @@ if (isset($_FILES['image']) && $_FILES['image']['error'] === 0) {
         $stmt->bind_param("sdsss", $nom, $prix, $imagePath, $categorie, $type);
 
         if ($stmt->execute()) {
-            echo "chaussure ajouté avec succès.";
+            echo "Vêtement ajouté avec succès.";
         } else {
             echo "Erreur lors de l'insertion en base de données.";
         }

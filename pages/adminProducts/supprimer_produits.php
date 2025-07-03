@@ -14,7 +14,7 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
     $result = $conn->query($query);
 
     if ($result && $row = $result->fetch_assoc()) {
-        $imagePath = '../' . $row['image'];
+        $imagePath = '../../' . $row['image'];
 
         // Supprime l'image du dossier si elle existe
         if (file_exists($imagePath)) {
